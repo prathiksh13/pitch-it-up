@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    match /users/{userId} {
+      allow read: if request.auth != null || request.path[4] == userId;
+      allow write: if isAdmin();
+    }
+
+    match /teams/{teamId} {
+      allow read: if true;
+      allow create: if get(/databases/$(database)/documents/eventStatus/global).data.registrationOpen == true;
+      allow update: if isAdmin() || (request.resource.data.totalTokens != resource.data.totalTokens);
+    }
+
+    match /problemStatements/{problemId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /transactions/{transId} {
+      allow read: if request.auth != null && (isAdmin() || resource.data.fromRollNo == request.auth.uid);
+      allow create: if request.auth != null && 
+                    get(/databases/$(database)/documents/eventStatus/global).data.votingRoundActive == true &&
+                    request.resource.data.tokens > 0;
+    }
+
+    match /eventStatus/global {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
