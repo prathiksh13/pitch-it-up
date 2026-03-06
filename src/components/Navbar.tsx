@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 export default function Navbar() {
     const { theme, toggleTheme } = useTheme();
     const { userData } = useAuth();
-    const [eventTitle, setEventTitle] = useState("HACKSTART");
+    const [eventTitle, setEventTitle] = useState("THE RUNWAY");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {

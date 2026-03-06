@@ -14,7 +14,7 @@ async function isAdmin(uid: string) {
 export async function GET() {
     try {
         const doc = await db.collection("eventSettings").doc("global").get();
-        return NextResponse.json(doc.exists ? doc.data() : { eventTitle: "Pitch It Up 2026", eventTagline: "Where Ideas Turn Into Unicorns" });
+        return NextResponse.json(doc.exists ? doc.data() : { eventTitle: "THE RUNWAY", eventTagline: "Where Ideas Turn Into Unicorns" });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }

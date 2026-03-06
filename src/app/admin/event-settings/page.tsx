@@ -93,7 +93,7 @@ export default function EventSettingsManagement() {
                                         type="text"
                                         value={eventTitle}
                                         onChange={(e) => setEventTitle(e.target.value)}
-                                        placeholder="e.g. Pitch It Up 2026"
+                                        placeholder="e.g. THE RUNWAY"
                                         className="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 outline-none focus:ring-2 ring-blue-500/20 focus:border-blue-500 transition-all font-bold text-center"
                                     />
                                 </div>
